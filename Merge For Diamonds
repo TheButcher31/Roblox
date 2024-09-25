@@ -1,0 +1,209 @@
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+local Window = OrionLib:MakeWindow({Name = "Merge For Diamonds!", HidePremium = false, IntroText = ("TheButcher"), SaveConfig = true, ConfigFolder = "OrionTest"})
+local autoRebirthActive = false
+local rebirthConnection
+
+--Tabs
+
+local InfiniteTab = Window:MakeTab({
+	Name = "Infinite",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local BlockRainTab = Window:MakeTab({
+	Name = "Block Rain",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local RebirthTab = Window:MakeTab({
+	Name = "Auto Rebirth",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local PerformanceTab = Window:MakeTab({
+	Name = "Performance",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+--Infinite Tab
+
+InfiniteTab:AddButton({
+	Name = "Get Infinite Gems",
+	Callback = function()
+      	    game:GetService("ReplicatedStorage").Remotes.GemEvent:FireServer(10000000000000000000000000000000000000000000000)
+  	end    
+})
+
+InfiniteTab:AddButton({
+	Name = "Get Infinite Cash",
+	Callback = function()
+            game:GetService("ReplicatedStorage").Remotes.AddRewardEvent:FireServer("Cash",10000000000000000000000000000000000000000000000)
+  	end    
+})
+
+
+InfiniteTab:AddButton({
+	Name = "Get 10K Spin",
+	Callback = function()
+            game:GetService("ReplicatedStorage").Remotes.AddRewardEvent:FireServer("Spins",10000)
+  	end    
+})
+
+InfiniteTab:AddButton({
+	Name = "Use 2x Cash Potion",
+	Callback = function()
+            game:GetService("ReplicatedStorage").Remotes.BuyPotionEvent:FireServer("Potion1",100)
+  	end    
+})
+
+InfiniteTab:AddButton({
+	Name = "Use 2x Spawn Rate Potion",
+	Callback = function()
+            game:GetService("ReplicatedStorage").Remotes.BuyPotionEvent:FireServer("Potion2",250)
+  	end    
+})
+
+InfiniteTab:AddButton({
+	Name = "Use 2x Max Blocks Potion",
+	Callback = function()
+            game:GetService("ReplicatedStorage").Remotes.BuyPotionEvent:FireServer("Potion3",500)
+  	end    
+})
+
+--Blcok Rain Tab
+
+BlockRainTab:AddButton({
+	Name = "10 Blocks",
+	Callback = function()
+            game:GetService("ReplicatedStorage").Remotes.AddRewardEvent:FireServer("Blocks",10)
+  	end    
+})
+
+BlockRainTab:AddButton({
+	Name = "50 Blocks",
+	Callback = function()
+            game:GetService("ReplicatedStorage").Remotes.AddRewardEvent:FireServer("Blocks",50)
+  	end    
+})
+
+BlockRainTab:AddButton({
+	Name = "100 Blocks",
+	Callback = function()
+            game:GetService("ReplicatedStorage").Remotes.AddRewardEvent:FireServer("Blocks",100)
+  	end    
+})
+
+BlockRainTab:AddButton({
+	Name = "500 Blocks",
+	Callback = function()
+            game:GetService("ReplicatedStorage").Remotes.AddRewardEvent:FireServer("Blocks",500)
+  	end    
+})
+
+BlockRainTab:AddButton({
+	Name = "1000 Blocks",
+	Callback = function()
+            game:GetService("ReplicatedStorage").Remotes.AddRewardEvent:FireServer("Blocks",1000)
+  	end    
+})
+
+--Auto Rebirth Tab
+
+local autoRebirthActive = false
+local rebirthConnection
+
+RebirthTab:AddToggle({
+    Name = "Only Auto Rebirth",
+    Default = false,
+    Callback = function(Value)
+        autoRebirthActive = Value
+        
+        if autoRebirthActive then
+            rebirthConnection = game:GetService("RunService").Heartbeat:Connect(function()
+                game:GetService("ReplicatedStorage").Remotes.RebirthConfirmEvent:FireServer(3, 291600, 200)
+            end)
+        else
+            if rebirthConnection then
+                rebirthConnection:Disconnect()
+                rebirthConnection = nil
+            end
+        end
+    end    
+})
+
+RebirthTab:AddToggle({
+    Name = "Fastest AutoRebirth",
+    Default = false,
+    Callback = function(Value)
+        autoRebirthActive = Value
+        
+        if autoRebirthActive then
+            rebirthConnection = game:GetService("RunService").Heartbeat:Connect(function()
+                game:GetService("ReplicatedStorage").Remotes.AddRewardEvent:FireServer("Cash",10000000000000000000000000000000000000000000000)
+                game:GetService("ReplicatedStorage").Remotes.RebirthConfirmEvent:FireServer(3, 291600, 200)
+            end)
+        else
+            if rebirthConnection then
+                rebirthConnection:Disconnect()
+                rebirthConnection = nil
+            end
+        end
+    end    
+})
+
+--Performance
+
+local normalPerformanceActive = false
+
+PerformanceTab:AddToggle({
+    Name = "Guileri Kapat",
+    Default = false,
+    Callback = function(Value)
+        normalPerformanceActive = Value
+
+        if normalPerformanceActive then
+            -- Tüm GUI'leri kapat
+            for _, gui in pairs(game:GetService("Players").LocalPlayer.PlayerGui:GetChildren()) do
+                if gui:IsA("ScreenGui") then
+                    gui.Enabled = false
+                end
+            end
+        else
+            -- Toggle kapandığında tüm GUI'leri aç
+            for _, gui in pairs(game:GetService("Players").LocalPlayer.PlayerGui:GetChildren()) do
+                if gui:IsA("ScreenGui") then
+                    gui.Enabled = true
+                end
+            end
+        end
+    end    
+})
+
+PerformanceTab:AddButton({
+    Name = "No Lag",
+    Callback = function()
+        print("no lag")
+
+        -- Tüm Texture ve Decal'leri kaldır
+        local function removeTexturesAndDecals(parent)
+            for _, child in pairs(parent:GetChildren()) do
+                if child:IsA("Decal") or child:IsA("Texture") then
+                    child:Destroy()
+                end
+                -- Eğer child bir Model veya başka bir nesne içeriyorsa, o nesne için de aynı işlemi yap
+                removeTexturesAndDecals(child)
+            end
+        end
+
+        -- Tüm Workspace içindeki Texture ve Decal'leri kaldır
+        removeTexturesAndDecals(workspace)
+    end    
+})
+
+
+
+orionlib:Init()
