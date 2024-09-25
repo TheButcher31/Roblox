@@ -53,28 +53,7 @@ InfiniteTab:AddButton({
   	end    
 })
 
-InfiniteTab:AddButton({
-	Name = "Use 2x Cash Potion",
-	Callback = function()
-            game:GetService("ReplicatedStorage").Remotes.BuyPotionEvent:FireServer("Potion1",100)
-  	end    
-})
-
-InfiniteTab:AddButton({
-	Name = "Use 2x Spawn Rate Potion",
-	Callback = function()
-            game:GetService("ReplicatedStorage").Remotes.BuyPotionEvent:FireServer("Potion2",250)
-  	end    
-})
-
-InfiniteTab:AddButton({
-	Name = "Use 2x Max Blocks Potion",
-	Callback = function()
-            game:GetService("ReplicatedStorage").Remotes.BuyPotionEvent:FireServer("Potion3",500)
-  	end    
-})
-
---Blcok Rain Tab
+--Block Rain Tab
 
 BlockRainTab:AddButton({
 	Name = "10 Blocks",
