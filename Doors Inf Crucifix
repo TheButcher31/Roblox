@@ -1,4 +1,4 @@
-print("gae")
+print("infcurcifix")
 local lplr = game.Players.LocalPlayer
 while true do
     task.wait()
