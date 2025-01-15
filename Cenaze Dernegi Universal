@@ -27,13 +27,13 @@ local function GetVehicleFromDescendant(Descendant)
         Descendant:FindFirstAncestorWhichIsA("Model")
 end
 
-local vehiclePage = Venyx:addPage("Vehicle", 8356815386)
-local speedSection = vehiclePage:addSection("Acceleration")
+local vehiclePage = Venyx:addPage("Araç", 8356815386)
+local speedSection = vehiclePage:addSection("Hızlanma")
 local velocityEnabled = true
 local velocityMult = 0.025
 local velocityEnabledKeyCode = Enum.KeyCode.W
 
-speedSection:addSlider("Multiplier (Thousandths)", velocityMult * 1000, 0, 50, function(value)
+speedSection:addSlider("Hızlandırma Gücü", velocityMult * 1000, 0, 50, function(value)
     velocityMult = value / 1000
 end)
 
@@ -46,7 +46,7 @@ end, {
     placeholder = "Çarpan"
 })
 
-speedSection:addKeybind("Velocity Enabled", velocityEnabledKeyCode, function()
+speedSection:addKeybind("Hızlandırma Tuşu", velocityEnabledKeyCode, function()
     if not velocityEnabled then return end
     while UserInputService:IsKeyDown(velocityEnabledKeyCode) do
         task.wait(0)
@@ -64,10 +64,10 @@ speedSection:addKeybind("Velocity Enabled", velocityEnabledKeyCode, function()
     end
 end, function(v) velocityEnabledKeyCode = v.KeyCode end)
 
-local decelerateSelection = vehiclePage:addSection("Deceleration")
+local decelerateSelection = vehiclePage:addSection("Yavaşlama")
 local qbEnabledKeyCode = Enum.KeyCode.S
 local velocityMult2 = 150e-3
-decelerateSelection:addSlider("Brake Force (Thousandths)", velocityMult2 * 1000, 0, 300, function(value)
+decelerateSelection:addSlider("Fren Gücü", velocityMult2 * 1000, 0, 300, function(value)
     velocityMult2 = value / 1000
 end)
 
@@ -80,7 +80,7 @@ end, {
     placeholder = "Fren"
 })
 
-decelerateSelection:addKeybind("Quick Brake Enabled", qbEnabledKeyCode, function()
+decelerateSelection:addKeybind("Anında Durma", qbEnabledKeyCode, function()
     if not velocityEnabled then return end
     while UserInputService:IsKeyDown(qbEnabledKeyCode) do
         task.wait(0)
@@ -98,7 +98,7 @@ decelerateSelection:addKeybind("Quick Brake Enabled", qbEnabledKeyCode, function
     end
 end, function(v) qbEnabledKeyCode = v.KeyCode end)
 
-local movementPage = Venyx:addPage("Movement", 1234567890)
+local movementPage = Venyx:addPage("Hareket", 1234567890)
 local speedSection = movementPage:addSection("Koşma Hızı")
 local jumpSection = movementPage:addSection("Zıplama Gücü")
 
