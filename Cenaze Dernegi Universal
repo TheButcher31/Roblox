@@ -80,7 +80,7 @@ end, {
     placeholder = "Fren"
 })
 
-decelerateSelection:addKeybind("Anında Durma", qbEnabledKeyCode, function()
+decelerateSelection:addKeybind("Fren Tuşu", qbEnabledKeyCode, function()
     if not velocityEnabled then return end
     while UserInputService:IsKeyDown(qbEnabledKeyCode) do
         task.wait(0)
