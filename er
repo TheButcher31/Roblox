@@ -1,1 +1,31 @@
+local KeyGuardLibrary = loadstring(game:HttpGet("https://cdn.keyguardian.org/library/v1.0.0.lua"))()
+local trueData = "3b3cd133e141464cadf44d405033bc6d"
+local falseData = "31f630804df14da18b21452f3fe1da80"
 
+KeyGuardLibrary.Set({
+	publicToken = "68b7bbf79e324aa6944f9fd493e67864",
+	privateToken = "f4bad58dd12a4268b2ae5b192c307657",
+	trueData = trueData,
+	falseData = falseData,
+})
+
+local key = "test"
+
+local getkey = KeyGuardLibrary.getLink()
+print(getkey)
+
+local response = KeyGuardLibrary.validateDefaultKey(key)
+print(response)
+
+if response == trueData then
+	print("Key is valid") -- Paste Code Here
+else
+	print("Key is invalid")
+end
+
+--[[
+	KeyGuardLibrary.validateDefaultKey(key) - Validate key
+	KeyGuardLibrary.validatePremiumKey(key) - Validate premium key
+	KeyGuardLibrary.getService() - Get service
+	KeyGuardLibrary.getLink() - Get link
+]]
